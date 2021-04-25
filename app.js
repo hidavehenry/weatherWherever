@@ -26,7 +26,8 @@ app.getWeather = function(query) {
         }
     }).then(function(result) {
         $('.results').empty();
-        app.displayWeather(result);
+        app.displayWeather(result)
+        .error(alert('try again'));
     });
 }
 
@@ -34,7 +35,6 @@ app.init = function() {
     $('form').on('submit', function(event) {
         event.preventDefault();
         const userInput = $('#search-input').val();
-        // console.log(userInput);
         app.getWeather(userInput);
       });
 };
