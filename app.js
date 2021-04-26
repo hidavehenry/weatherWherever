@@ -1,22 +1,33 @@
 const app = {};
 
 apikey = `d7fc3ef58680f5283c9ec164da9f40d9`
+url = `https://api.openweathermap.org/data/2.5/weather?`
 
 app.displayWeather = function(result) {
     const weatherHtml = `
     <div class="container">
-      <p class="weather-city">${result.name}</p>
-      <p class="weather-temp">Temperature is ${result.main.temp}<span>&#8451;</span></p>
-      <p class="weather-feels-like">Feels like ${result.main.feels_like}<span>&#8451;</span></p>
-      <p class="weather-description">${result.weather[0].description}</p>
+      <p>${result.name}</p>
+      <p>Temperature is ${result.main.temp}<span>&#8451;</span></p>
+      <p>Feels like ${result.main.feels_like}<span>&#8451;</span></p>
+      <p>${result.weather[0].description}</p>
       </div>
   `
   $('.results').append(weatherHtml);
-};    
+};  
+
+app.returnError = function(result) {
+    const errorHtml = `
+    <div class="container">
+      <p class="error-message">No city found with that name.</p>
+      <p class="error-message">Try again!</p>
+      </div>
+  `
+  $('.results').append(errorHtml);
+}
 
 app.getWeather = function(query) {
     $.ajax({
-        url: `https://api.openweathermap.org/data/2.5/weather?`,
+        url: url,
         method: 'GET',
         dataType: 'json',
         data: {
@@ -27,7 +38,9 @@ app.getWeather = function(query) {
     }).then(function(result) {
         $('.results').empty();
         app.displayWeather(result)
-        .error(alert('try again'));
+    }).fail(function(result) {
+        $('.results').empty();
+        app.returnError(result)
     });
 }
 

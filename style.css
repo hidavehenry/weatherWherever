@@ -29,7 +29,7 @@ body {
   }
 
   p {
-      font-size: 25px;
+      font-size: 30px;
   }
 
   span {
@@ -43,10 +43,11 @@ body {
   }
 
   .input-area {
+      text-align: center;
       padding: 30px;
   }
 
-  input[type="text"]{
+  input {
     height: 50px;
     width: 300px;
     background: rgb(226, 226, 226);
@@ -58,7 +59,7 @@ body {
     padding: 10px 10px;
 }
 
-input[type="submit"]{
+button {
     height: 50px;
     width: 100px;
     background: rgb(14, 1, 1);
@@ -69,4 +70,23 @@ input[type="submit"]{
     border: none;
     border-radius: 4px;
     padding: 10px 10px;
+}
+
+.error-message {
+    font-size: 40px;
+}
+
+@media screen and (max-width: 500px) {
+
+    button {
+        margin: 20px;
+    }
+
+    h1 {
+        font-size: 50px;
+    }
+  
+    h2 {
+        font-size: 20px;
+    }
 }
